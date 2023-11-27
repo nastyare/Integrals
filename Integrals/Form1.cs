@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using org.mariuszgromada.math.mxparser;
-
+using System.Windows.Forms.DataVisualization.Charting;
+using org.matheval.Functions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ZedGraph;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Drawing;
 
 namespace Integrals
 {
@@ -9,9 +13,8 @@ namespace Integrals
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -22,110 +25,198 @@ namespace Integrals
 
         }
 
-        
+        static double RectangleMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
+        {
+            int n = 1; // Начальное количество разбиений
+            double h = (b - a) / n; // Шаг разбиения
+            double integral = 0.0;
+            double previousIntegral = double.MaxValue;
 
-        double function(double x)
+            while (Math.Abs(previousIntegral - integral) > exp)
+            {
+                previousIntegral = integral;
+                integral = 0.0;
+
+                for (int i = 0; i < n; i++)
+                {
+                    double x_i = a + i * h + h / 2.0; // Середина текущего прямоугольника
+                    integral += h * func(x_i); // Площадь текущего прямоугольника
+                }
+
+                n *= 2; // Удвоение числа разбиений
+                h = (b - a) / n; // Пересчет шага
+            }
+            Opt = n / 2;
+
+            return integral;
+        }
+        public static double SimpsonMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
+        {
+            int n = 1; // Начальное количество разбиений
+            double h = (b - a) / n; // Шаг разбиения
+            double integral = 0.0;
+            double previousIntegral = double.MaxValue;
+
+            while (Math.Abs(previousIntegral - integral) > exp)
+            {
+                previousIntegral = integral;
+                integral = 0.0;
+
+                for (int i = 0; i < n; i++)
+                {
+                    double x_i = a + i * h; // Левая граница текущего интервала
+                    double x_next = a + (i + 1) * h; // Правая граница текущего интервала
+                    double x_mid = (x_i + x_next) / 2.0; // Середина текущего интервала
+
+                    integral += h / 6.0 * (func(x_i) + 4 * func(x_mid) + func(x_next)); // Площадь интервала по методу Симпсона
+                }
+
+                n *= 2; // Удвоение числа разбиений
+                h = (b - a) / n; // Пересчет шага
+            }
+            Opt = n / 2;
+
+            return integral;
+        }
+
+        public static double TrapezoidalMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
+        {
+            int n = 1; // Начальное количество разбиений
+            double h = (b - a) / n; // Шаг разбиения
+            double integral = 0.0;
+            double previousIntegral = double.MaxValue;
+
+            while (Math.Abs(previousIntegral - integral) > exp)
+            {
+                previousIntegral = integral;
+                integral = 0.0;
+
+                for (int i = 0; i < n; i++)
+                {
+                    double x_i = a + i * h; // Левая граница текущей трапеции
+                    double x_next = a + (i + 1) * h; // Правая граница текущей трапеции
+
+                    integral += h * (func(x_i) + func(x_next)) / 2.0; // Площадь текущей трапеции
+                }
+
+                n *= 2; // Удвоение числа разбиений
+                h = (b - a) / n; // Пересчет шага
+            }
+            Opt = n / 2;
+
+            return integral;
+        }
+
+        double function(double X)
         {
             org.matheval.Expression expression = new org.matheval.Expression(formBox.Text.ToLower());
-            expression.Bind("x", x);
+            expression.Bind("x", X);
 
-            decimal value = expression.Eval<decimal>();
-            return (double)value;
+            double value = expression.Eval<double>();
+            return value;
         }
 
-        public double RectangleMethod(Func<double, double> inputFunction, double a, double b, double n)
-        {           
-            //Func<double, double> funInt = x => function(x);
-            double h = (b - a) / n;
-            double xi = a + h / 2;
-            double fun = function(xi);
-            double result = fun;
-
-            for (int i = 0; i < n; i++)
-            {
-                double nextxi = xi + h;
-                result += function(nextxi);
-            }
-
-            result *= h;
-            return result;
-        }
-
-        public double SimpsonMethod(Func<double, double> function, double a, double b, int n)
+        private void рассчитатьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (n % 2 != 0)
+            double a, b, exp;
+            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
             {
-                throw new ArgumentException("Количество подотрезков (n) должно быть четным.");
+                throw new ArgumentException("Некорректные значения входных данных");
             }
-
-            double h = (b - a) / n;
-            double result = function(a) + function(b);
-
-            for (int i = 1; i < n; i++)
+            if (a >= b)
             {
-                double xi = a + i * h;
-
-                if (i % 2 == 0)
-                {
-                    result += 2 * function(xi);
-                }
-                else
-                {
-                    result += 4 * function(xi);
-                }
+                throw new ArgumentException("Некорректные границы интервала");
             }
-
-            result *= h / 3;
-            return result;
-        }
-
-        public double TrapezoidalMethod(Func<double, double> function, double a, double b, int n)
-        {
-            double h = (b - a) / n;
-            double result = (function(a) + function(b)) / 2;
-
-            for (int i = 1; i < n; i++)
+            if (!rectangleBox.Checked && !simpsonBox.Checked && !trapezoidaBox.Checked)
             {
-                double xi = a + i * h;
-                result += function(xi);
+                MessageBox.Show("Не выбран ни один из методов рассчёта.");
             }
-
-            result *= h;
-            return result;
-        }
-
-        private void методПрямоугольниковToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-                double a, b, exp;
-                if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
-                {
-                    throw new ArgumentException("Некорректные значения входных данных");
-                }
-                if (a >= b)
-                {
-                    throw new ArgumentException("Некорректные границы интервала");
-                }
-                int n = 100;
-                double result = RectangleMethod(function, a, b, n);
-
-            //проверка на точность
-            int k = 10; int i = 0;
-            double diiff; 
-            do
+            if (rectangleBox.Checked)
             {
-                ++i;
-                diiff = Math.Abs(RectangleMethod(function, a, b, k * i) - RectangleMethod(function, a, b, k * (i + 1)));
-            } while (diiff > exp);
+                double rectangleResult = RectangleMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
+                decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
 
                 // Выводим результат
-                resBox.Text = $"{result}";
-
-            /*} catch
+                resrecBox.Text = $"{resultAsDecimal:F5}";
+                nrecBox.Text = $"{Opt}";
+            }
+            if (simpsonBox.Checked)
             {
-                MessageBox.Show("Некорректная работа программы");
-            }*/
+                double trapezoidaResult = TrapezoidalMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
+                decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
+
+                // Выводим результат
+                ressimBox.Text = $"{resultAsDecimal:F5}";
+                nsimBox.Text = $"{Opt}";
+            }
+            if (trapezoidaBox.Checked)
+            {
+                double simpsonResult = SimpsonMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
+                decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
+
+                // Выводим результат
+                restraBox.Text = $"{resultAsDecimal:F5}";
+                ntraBox.Text = $"{Opt}";
+            }
         }
+
+        /*private void методПрямоугольниковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+ 
+            double a, b, exp;
+            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
+            {
+                throw new ArgumentException("Некорректные значения входных данных");
+            }
+            if (a >= b)
+            {
+                throw new ArgumentException("Некорректные границы интервала");
+            }
+            double rectangleResult = RectangleMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
+            decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
+
+            // Выводим результат
+            resrecBox.Text = $"{resultAsDecimal:F5}";
+            nrecBox.Text = $"{Opt}";
+        }
+        private void методТрапецииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            double a, b, exp;
+            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
+            {
+                throw new ArgumentException("Некорректные значения входных данных");
+            }
+            if (a >= b)
+            {
+                throw new ArgumentException("Некорректные границы интервала");
+            }
+            double trapezoidaResult = TrapezoidalMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
+            decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
+
+            // Выводим результат
+            resrecBox.Text = $"{resultAsDecimal:F5}";
+            nrecBox.Text = $"{Opt}";
+        }
+        private void методПараболToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            double a, b, exp;
+            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
+            {
+                throw new ArgumentException("Некорректные значения входных данных");
+            }
+            if (a >= b)
+            {
+                throw new ArgumentException("Некорректные границы интеграла");
+            }
+            double simpsonResult = SimpsonMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
+            decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
+
+            // Выводим результат
+            resrecBox.Text = $"{resultAsDecimal:F5}";
+            nrecBox.Text = $"{Opt}";
+        }*/
+
     }
 }
