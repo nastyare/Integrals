@@ -129,7 +129,16 @@ namespace Integrals
             }
             if (!rectangleBox.Checked && !simpsonBox.Checked && !trapezoidaBox.Checked)
             {
-                MessageBox.Show("Не выбран ни один из методов рассчёта.");
+                MessageBox.Show("Не выбран ни один из методов расчёта.");
+            }
+            this.chart1.Series[0].Points.Clear();
+            double x = a;
+            double y;
+            while (x <= b)
+            {
+                y = function(x);
+                this.chart1.Series[0].Points.AddXY(x, y);
+                x += 0.1;
             }
             if (rectangleBox.Checked)
             {
@@ -158,65 +167,6 @@ namespace Integrals
                 restraBox.Text = $"{resultAsDecimal:F5}";
                 ntraBox.Text = $"{Opt}";
             }
-        }
-
-        /*private void методПрямоугольниковToolStripMenuItem_Click(object sender, EventArgs e)
-        {
- 
-            double a, b, exp;
-            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
-            {
-                throw new ArgumentException("Некорректные значения входных данных");
-            }
-            if (a >= b)
-            {
-                throw new ArgumentException("Некорректные границы интервала");
-            }
-            double rectangleResult = RectangleMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
-            decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
-
-            // Выводим результат
-            resrecBox.Text = $"{resultAsDecimal:F5}";
-            nrecBox.Text = $"{Opt}";
-        }
-        private void методТрапецииToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            double a, b, exp;
-            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
-            {
-                throw new ArgumentException("Некорректные значения входных данных");
-            }
-            if (a >= b)
-            {
-                throw new ArgumentException("Некорректные границы интервала");
-            }
-            double trapezoidaResult = TrapezoidalMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
-            decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
-
-            // Выводим результат
-            resrecBox.Text = $"{resultAsDecimal:F5}";
-            nrecBox.Text = $"{Opt}";
-        }
-        private void методПараболToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            double a, b, exp;
-            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b) || !double.TryParse(eBox.Text, out exp))
-            {
-                throw new ArgumentException("Некорректные значения входных данных");
-            }
-            if (a >= b)
-            {
-                throw new ArgumentException("Некорректные границы интеграла");
-            }
-            double simpsonResult = SimpsonMethod(function, a, b, exp, out int Opt);//RectangleMethod(function, a, b, n);
-            decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
-
-            // Выводим результат
-            resrecBox.Text = $"{resultAsDecimal:F5}";
-            nrecBox.Text = $"{Opt}";
-        }*/
-
+        }       
     }
 }

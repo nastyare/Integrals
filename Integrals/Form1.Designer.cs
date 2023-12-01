@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рассчитатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,55 +83,59 @@
             // рассчитатьToolStripMenuItem
             // 
             this.рассчитатьToolStripMenuItem.Name = "рассчитатьToolStripMenuItem";
-            this.рассчитатьToolStripMenuItem.Size = new System.Drawing.Size(233, 30);
+            this.рассчитатьToolStripMenuItem.Size = new System.Drawing.Size(176, 30);
             this.рассчитатьToolStripMenuItem.Text = "Рассчитать";
             this.рассчитатьToolStripMenuItem.Click += new System.EventHandler(this.рассчитатьToolStripMenuItem_Click);
             // 
             // очиститьToolStripMenuItem
             // 
             this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
-            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(233, 30);
+            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(176, 30);
             this.очиститьToolStripMenuItem.Text = "Очистить";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(31, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
+            this.label1.Size = new System.Drawing.Size(90, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Формула:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(288, 49);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 16);
+            this.label2.Size = new System.Drawing.Size(38, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "a = ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(502, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 16);
+            this.label3.Size = new System.Drawing.Size(33, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "b =";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(723, 55);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(722, 52);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 16);
+            this.label4.Size = new System.Drawing.Size(38, 20);
             this.label4.TabIndex = 4;
             this.label4.Text = "e = ";
             // 
             // formBox
             // 
-            this.formBox.Location = new System.Drawing.Point(120, 43);
+            this.formBox.Location = new System.Drawing.Point(133, 49);
             this.formBox.Name = "formBox";
             this.formBox.Size = new System.Drawing.Size(100, 22);
             this.formBox.TabIndex = 5;
@@ -139,7 +143,7 @@
             // 
             // aBox
             // 
-            this.aBox.Location = new System.Drawing.Point(334, 46);
+            this.aBox.Location = new System.Drawing.Point(341, 49);
             this.aBox.Name = "aBox";
             this.aBox.Size = new System.Drawing.Size(100, 22);
             this.aBox.TabIndex = 6;
@@ -147,7 +151,7 @@
             // 
             // bBox
             // 
-            this.bBox.Location = new System.Drawing.Point(552, 49);
+            this.bBox.Location = new System.Drawing.Point(555, 50);
             this.bBox.Name = "bBox";
             this.bBox.Size = new System.Drawing.Size(100, 22);
             this.bBox.TabIndex = 7;
@@ -161,16 +165,18 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(34, 278);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(928, 340);
             this.chart1.TabIndex = 9;
             this.chart1.Text = "chart1";
@@ -178,41 +184,46 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(17, 155);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 16);
+            this.label5.Size = new System.Drawing.Size(165, 20);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Оптимальное число разбиений:";
+            this.label5.Text = "Кол-во разбиений:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.Location = new System.Drawing.Point(17, 206);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 16);
+            this.label6.Size = new System.Drawing.Size(189, 20);
             this.label6.TabIndex = 11;
             this.label6.Text = "Значение интеграла:";
             // 
             // nrecBox
             // 
-            this.nrecBox.Location = new System.Drawing.Point(247, 155);
+            this.nrecBox.Location = new System.Drawing.Point(278, 153);
             this.nrecBox.Name = "nrecBox";
-            this.nrecBox.Size = new System.Drawing.Size(69, 22);
+            this.nrecBox.ReadOnly = true;
+            this.nrecBox.Size = new System.Drawing.Size(100, 22);
             this.nrecBox.TabIndex = 12;
             // 
             // resrecBox
             // 
-            this.resrecBox.Location = new System.Drawing.Point(185, 206);
+            this.resrecBox.Location = new System.Drawing.Point(278, 204);
             this.resrecBox.Name = "resrecBox";
+            this.resrecBox.ReadOnly = true;
             this.resrecBox.Size = new System.Drawing.Size(100, 22);
             this.resrecBox.TabIndex = 13;
             // 
             // rectangleBox
             // 
             this.rectangleBox.AutoSize = true;
-            this.rectangleBox.Location = new System.Drawing.Point(34, 112);
+            this.rectangleBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rectangleBox.Location = new System.Drawing.Point(191, 112);
             this.rectangleBox.Name = "rectangleBox";
-            this.rectangleBox.Size = new System.Drawing.Size(188, 20);
+            this.rectangleBox.Size = new System.Drawing.Size(237, 24);
             this.rectangleBox.TabIndex = 14;
             this.rectangleBox.Text = "метод прямоугольников";
             this.rectangleBox.UseVisualStyleBackColor = true;
@@ -220,9 +231,10 @@
             // simpsonBox
             // 
             this.simpsonBox.AutoSize = true;
-            this.simpsonBox.Location = new System.Drawing.Point(443, 112);
+            this.simpsonBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.simpsonBox.Location = new System.Drawing.Point(482, 112);
             this.simpsonBox.Name = "simpsonBox";
-            this.simpsonBox.Size = new System.Drawing.Size(137, 20);
+            this.simpsonBox.Size = new System.Drawing.Size(173, 24);
             this.simpsonBox.TabIndex = 15;
             this.simpsonBox.Text = "метод Симпсона";
             this.simpsonBox.UseVisualStyleBackColor = true;
@@ -230,38 +242,43 @@
             // trapezoidaBox
             // 
             this.trapezoidaBox.AutoSize = true;
-            this.trapezoidaBox.Location = new System.Drawing.Point(741, 112);
+            this.trapezoidaBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.trapezoidaBox.Location = new System.Drawing.Point(792, 112);
             this.trapezoidaBox.Name = "trapezoidaBox";
-            this.trapezoidaBox.Size = new System.Drawing.Size(135, 20);
+            this.trapezoidaBox.Size = new System.Drawing.Size(170, 24);
             this.trapezoidaBox.TabIndex = 16;
             this.trapezoidaBox.Text = "метод трапеций";
             this.trapezoidaBox.UseVisualStyleBackColor = true;
             // 
             // nsimBox
             // 
-            this.nsimBox.Location = new System.Drawing.Point(443, 155);
+            this.nsimBox.Location = new System.Drawing.Point(521, 153);
             this.nsimBox.Name = "nsimBox";
+            this.nsimBox.ReadOnly = true;
             this.nsimBox.Size = new System.Drawing.Size(100, 22);
             this.nsimBox.TabIndex = 17;
             // 
             // ressimBox
             // 
-            this.ressimBox.Location = new System.Drawing.Point(443, 206);
+            this.ressimBox.Location = new System.Drawing.Point(521, 204);
             this.ressimBox.Name = "ressimBox";
+            this.ressimBox.ReadOnly = true;
             this.ressimBox.Size = new System.Drawing.Size(100, 22);
             this.ressimBox.TabIndex = 18;
             // 
             // ntraBox
             // 
-            this.ntraBox.Location = new System.Drawing.Point(741, 155);
+            this.ntraBox.Location = new System.Drawing.Point(830, 155);
             this.ntraBox.Name = "ntraBox";
+            this.ntraBox.ReadOnly = true;
             this.ntraBox.Size = new System.Drawing.Size(100, 22);
             this.ntraBox.TabIndex = 19;
             // 
             // restraBox
             // 
-            this.restraBox.Location = new System.Drawing.Point(741, 206);
+            this.restraBox.Location = new System.Drawing.Point(830, 204);
             this.restraBox.Name = "restraBox";
+            this.restraBox.ReadOnly = true;
             this.restraBox.Size = new System.Drawing.Size(100, 22);
             this.restraBox.TabIndex = 20;
             // 
