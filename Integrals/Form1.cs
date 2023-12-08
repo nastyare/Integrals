@@ -6,6 +6,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ZedGraph;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using System.Drawing;
+using System.Linq;
 
 namespace Integrals
 {
@@ -46,6 +47,7 @@ namespace Integrals
 
             chart1.Annotations.Add(verticalLine);
         }
+      
 
         private void рассчитатьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -88,7 +90,7 @@ namespace Integrals
                 double rectangleResult = CalculationExp.RectangleMethod(function, a, b, exp, out int Opt);
                 decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
 
-                resrecBox.Text = $"{resultAsDecimal:F5}";
+                resrecBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
                 nrecBox.Text = $"{Opt}";
             } else
             {
@@ -96,7 +98,7 @@ namespace Integrals
                 int numSteps = int.Parse(nBox.Text);
                 double rectangleResult = CalculationThroughN.RectangleMethod(function, a, b, numSteps);
                 decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
-                resrecBox.Text = $"{resultAsDecimal:F5}";
+                resrecBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
             }
 
             //Метод Трапеций
@@ -106,7 +108,7 @@ namespace Integrals
                 double trapezoidaResult = CalculationExp.TrapezoidalMethod(function, a, b, exp, out int Opt);
                 decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
 
-                restraBox.Text = $"{resultAsDecimal:F5}";
+                restraBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
                 ntraBox.Text = $"{Opt}";
             } else
             {
@@ -114,7 +116,7 @@ namespace Integrals
                 int numSteps = int.Parse(nBox.Text);
                 double trapezoidaResult = CalculationThroughN.TrapezoidalMethod(function, a, b, numSteps);
                 decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
-                restraBox.Text = $"{resultAsDecimal:F5}";
+                restraBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
             }
 
             //Метод Симпсона
@@ -124,7 +126,7 @@ namespace Integrals
                 double simpsonResult = CalculationExp.SimpsonMethod(function, a, b, exp, out int Opt);
                 decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
 
-                ressimBox.Text = $"{resultAsDecimal:F5}";
+                ressimBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
                 nsimBox.Text = $"{Opt}";
             } else
             {
@@ -132,7 +134,7 @@ namespace Integrals
                 int numSteps = int.Parse(nBox.Text);
                 double simpsonResult = CalculationThroughN.SimpsonMethod(function, a, b, numSteps);
                 decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
-                ressimBox.Text = $"{resultAsDecimal:F5}";
+                ressimBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
             }
         }       
     }
