@@ -84,7 +84,7 @@ namespace Integrals
 
                 for (int i = 0; i < n; i++)
                 {
-                    double x_i = a + i * h + h / 2.0; // Середина текущего прямоугольника
+                    double x_i = a + i * h; //double x_i = a + i * h + h / 2.0; 
                     integral += h * func(x_i); // Площадь текущего прямоугольника
                 }
 
@@ -119,10 +119,12 @@ namespace Integrals
                 n *= 2; // Удвоение числа разбиений
                 h = (b - a) / n; // Пересчет шага
             }
+
             Opt = n / 2;
 
             return integral;
         }
+
 
         public static double TrapezoidalMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
         {

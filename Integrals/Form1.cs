@@ -56,21 +56,23 @@ namespace Integrals
 
             if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b))
             {
-                throw new ArgumentException("Некорректные значения входных данных");
+                throw new Exception("Некорректные значения входных данных");
             }
 
             if (!double.TryParse(eBox.Text, out exp) && !int.TryParse(nBox.Text, out n))
             {
-                throw new ArgumentException("Введите корректное значение для точности (e) или числа шагов (n)");
+                MessageBox.Show("Введите корректное значение для точности (e) или числа шагов (n)");
             }
             if (a >= b)
             {
-                throw new ArgumentException("Некорректные границы интервала");
+                MessageBox.Show("Некорректные границы интервала");
             }
             if (!rectangleBox.Checked && !simpsonBox.Checked && !trapezoidaBox.Checked)
             {
                 MessageBox.Show("Не выбран ни один из методов расчёта.");
             }
+
+
             this.chart1.Series[0].Points.Clear();
             double x = a;
             double y;
@@ -80,61 +82,94 @@ namespace Integrals
                 this.chart1.Series[0].Points.AddXY(x, y);
                 x += 0.1;
             }
-            AddVerticalLine(chart1.ChartAreas[0], a, Color.Red); // Change Color as needed
+            AddVerticalLine(chart1.ChartAreas[0], a, Color.Red);
             AddVerticalLine(chart1.ChartAreas[0], b, Color.Red);
 
             //Метод Прямоугольников
-            if (eBox.Focused && rectangleBox.Checked)
+            if (rectangleBox.Checked)
             {
-                //ЧЕРЕЗ Е
-                double rectangleResult = CalculationExp.RectangleMethod(function, a, b, exp, out int Opt);
-                decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
+                if (!string.IsNullOrEmpty(eBox.Text) && !string.IsNullOrEmpty(nBox.Text))
+                {
+                    MessageBox.Show("Выберите только один метод (через e или через n)");
+                    return;
+                }
 
-                resrecBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
-                nrecBox.Text = $"{Opt}";
-            } else
-            {
-                //ЧЕРЕЗ Н
-                int numSteps = int.Parse(nBox.Text);
-                double rectangleResult = CalculationThroughN.RectangleMethod(function, a, b, numSteps);
-                decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
-                resrecBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
+                if (!string.IsNullOrEmpty(eBox.Text))
+                {
+                    //ЧЕРЕЗ Е
+                    double rectangleResult = CalculationExp.RectangleMethod(function, a, b, exp, out int Opt);
+                    //decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
+                    int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
+                    resrecBox.Text = string.Format($"{{0:F0}}", rectangleResult);
+
+                    //resrecBox.Text = $"{resultAsDecimal:F5}";
+                    nrecBox.Text = $"{Opt}";
+                }
+                else if (!string.IsNullOrEmpty(nBox.Text))
+                {
+                    //ЧЕРЕЗ Н
+                    int numSteps = int.Parse(nBox.Text);
+                    double rectangleResult = CalculationThroughN.RectangleMethod(function, a, b, numSteps);
+                    decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
+                    resrecBox.Text = $"{resultAsDecimal:F5}";
+                }
             }
 
-            //Метод Трапеций
-            if (eBox.Focused && simpsonBox.Checked)
-            {
-                //ЧЕРЕЗ Е
-                double trapezoidaResult = CalculationExp.TrapezoidalMethod(function, a, b, exp, out int Opt);
-                decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
 
-                restraBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
-                ntraBox.Text = $"{Opt}";
-            } else
+            //Метод Трапеций
+            if (trapezoidaBox.Checked)
             {
-                //ЧЕРЕЗ Н
-                int numSteps = int.Parse(nBox.Text);
-                double trapezoidaResult = CalculationThroughN.TrapezoidalMethod(function, a, b, numSteps);
-                decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
-                restraBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
+                if (!string.IsNullOrEmpty(eBox.Text) && !string.IsNullOrEmpty(nBox.Text))
+                {
+                    MessageBox.Show("Выберите только один метод (через e или через n)");
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(eBox.Text))
+                {
+                    //ЧЕРЕЗ Е
+                    double trapezoidaResult = CalculationExp.TrapezoidalMethod(function, a, b, exp, out int Opt);
+                    decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
+
+                    restraBox.Text = $"{resultAsDecimal:F5}";
+                    ntraBox.Text = $"{Opt}";
+                }
+                else if (!string.IsNullOrEmpty(nBox.Text))
+                {
+                    //ЧЕРЕЗ Н
+                    int numSteps = int.Parse(nBox.Text);
+                    double trapezoidaResult = CalculationThroughN.TrapezoidalMethod(function, a, b, numSteps);
+                    decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
+                    restraBox.Text = $"{resultAsDecimal:F5}";
+                }
             }
 
             //Метод Симпсона
-            if (eBox.Focused && trapezoidaBox.Checked)
+            if (simpsonBox.Checked)
             {
-                //ЧЕРЕЗ Е
-                double simpsonResult = CalculationExp.SimpsonMethod(function, a, b, exp, out int Opt);
-                decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
+                if (!string.IsNullOrEmpty(eBox.Text) && !string.IsNullOrEmpty(nBox.Text))
+                {
+                    MessageBox.Show("Выберите только один метод (через e или через n)");
+                    return;
+                }
 
-                ressimBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
-                nsimBox.Text = $"{Opt}";
-            } else
-            {
-                //ЧЕРЕЗ Н
-                int numSteps = int.Parse(nBox.Text);
-                double simpsonResult = CalculationThroughN.SimpsonMethod(function, a, b, numSteps);
-                decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
-                ressimBox.Text = $"{Math.Abs(resultAsDecimal):F5}";
+                if (!string.IsNullOrEmpty(eBox.Text))
+                {
+                    //ЧЕРЕЗ Е
+                    double simpsonResult = CalculationExp.SimpsonMethod(function, a, b, exp, out int Opt);
+                    decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
+
+                    ressimBox.Text = $"{resultAsDecimal:F5}";
+                    nsimBox.Text = $"{Opt}";
+                }
+                else if (!string.IsNullOrEmpty(nBox.Text))
+                {
+                    //ЧЕРЕЗ Н
+                    int numSteps = int.Parse(nBox.Text);
+                    double simpsonResult = CalculationThroughN.SimpsonMethod(function, a, b, numSteps);
+                    decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
+                    ressimBox.Text = $"{resultAsDecimal:F5}";
+                }
             }
         }       
     }
