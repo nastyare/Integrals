@@ -98,11 +98,9 @@ namespace Integrals
                 {
                     //ЧЕРЕЗ Е
                     double rectangleResult = CalculationExp.RectangleMethod(function, a, b, exp, out int Opt);
-                    //decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
                     int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
-                    resrecBox.Text = string.Format($"{{0:F{decimalPlaces}}}", rectangleResult);
+                    resrecBox.Text = string.Format($"{{0:F{decimalPlaces}}}", Math.Truncate(rectangleResult * 100) / 100);
 
-                    //resrecBox.Text = $"{resultAsDecimal:F5}";
                     nrecBox.Text = $"{Opt}";
                 }
                 else if (!string.IsNullOrEmpty(nBox.Text))
@@ -129,9 +127,8 @@ namespace Integrals
                 {
                     //ЧЕРЕЗ Е
                     double trapezoidaResult = CalculationExp.TrapezoidalMethod(function, a, b, exp, out int Opt);
-                    decimal resultAsDecimal = Convert.ToDecimal(trapezoidaResult);
-
-                    restraBox.Text = $"{resultAsDecimal:F5}";
+                    int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
+                    restraBox.Text = string.Format($"{{0:F{decimalPlaces}}}", Math.Truncate(trapezoidaResult * 100) / 100);
                     ntraBox.Text = $"{Opt}";
                 }
                 else if (!string.IsNullOrEmpty(nBox.Text))
@@ -157,9 +154,8 @@ namespace Integrals
                 {
                     //ЧЕРЕЗ Е
                     double simpsonResult = CalculationExp.SimpsonMethod(function, a, b, exp, out int Opt);
-                    decimal resultAsDecimal = Convert.ToDecimal(simpsonResult);
-
-                    ressimBox.Text = $"{resultAsDecimal:F5}";
+                    int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
+                    ressimBox.Text = string.Format($"{{0:F{decimalPlaces}}}", Math.Truncate(simpsonResult * 100) / 100);
                     nsimBox.Text = $"{Opt}";
                 }
                 else if (!string.IsNullOrEmpty(nBox.Text))
