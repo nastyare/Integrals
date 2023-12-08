@@ -100,7 +100,7 @@ namespace Integrals
                     double rectangleResult = CalculationExp.RectangleMethod(function, a, b, exp, out int Opt);
                     //decimal resultAsDecimal = Convert.ToDecimal(rectangleResult);
                     int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
-                    resrecBox.Text = string.Format($"{{0:F0}}", rectangleResult);
+                    resrecBox.Text = string.Format($"{{0:F{decimalPlaces}}}", rectangleResult);
 
                     //resrecBox.Text = $"{resultAsDecimal:F5}";
                     nrecBox.Text = $"{Opt}";
