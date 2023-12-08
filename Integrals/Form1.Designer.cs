@@ -55,6 +55,8 @@
             this.ressimBox = new System.Windows.Forms.TextBox();
             this.ntraBox = new System.Windows.Forms.TextBox();
             this.restraBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -127,7 +129,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(722, 52);
+            this.label4.Location = new System.Drawing.Point(686, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 20);
             this.label4.TabIndex = 4;
@@ -158,7 +160,7 @@
             // 
             // eBox
             // 
-            this.eBox.Location = new System.Drawing.Point(787, 49);
+            this.eBox.Location = new System.Drawing.Point(740, 52);
             this.eBox.Name = "eBox";
             this.eBox.Size = new System.Drawing.Size(100, 22);
             this.eBox.TabIndex = 8;
@@ -282,11 +284,30 @@
             this.restraBox.Size = new System.Drawing.Size(100, 22);
             this.restraBox.TabIndex = 20;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.216F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(870, 52);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 20);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "n = ";
+            // 
+            // nBox
+            // 
+            this.nBox.Location = new System.Drawing.Point(922, 52);
+            this.nBox.Name = "nBox";
+            this.nBox.Size = new System.Drawing.Size(100, 22);
+            this.nBox.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 614);
+            this.Controls.Add(this.nBox);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.restraBox);
             this.Controls.Add(this.ntraBox);
             this.Controls.Add(this.ressimBox);
@@ -345,6 +366,8 @@
         private System.Windows.Forms.TextBox ressimBox;
         private System.Windows.Forms.TextBox ntraBox;
         private System.Windows.Forms.TextBox restraBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox nBox;
     }
 }
 
