@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Integrals
 {
@@ -28,7 +29,7 @@ namespace Integrals
         {
             if (n % 2 != 0)
             {
-                throw new ArgumentException("Количество подотрезков (n) должно быть четным.");
+                MessageBox.Show("Количество подотрезков (n) для метода Симпсона должно быть четным.");
             }
 
             double h = (b - a) / n;
