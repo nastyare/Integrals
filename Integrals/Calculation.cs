@@ -70,14 +70,28 @@ namespace Integrals
 
     internal class CalculationExp
     {
+        public static double SafeFunction(Func<double, double> func, double x)
+        {
+            try
+            {
+                return func(x);
+            }
+            catch (DivideByZeroException)
+            {
+                // Возвращаем 0 или другое значение, которое считается подходящим
+                // В этом случае, если функция вызывает исключение, мы просто игнорируем этот шаг
+                return 0;
+            }
+        }
+
         public static double RectangleMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
         {
             int n = 1; // Начальное количество разбиений
             double h = (b - a) / n; // Шаг разбиения
-            double integral = h * func(a + h / 2.0); // Начальное приближение интеграла
+            double integral = h * SafeFunction(func, a + h / 2.0); // Начальное приближение интеграла
 
             // Проверка начальной точности
-            if (Math.Abs(integral - func(a) * (b - a)) <= exp)
+            if (Math.Abs(integral - SafeFunction(func, a) * (b - a)) <= exp)
             {
                 Opt = n;
                 return integral;
@@ -96,7 +110,7 @@ namespace Integrals
                 for (int i = 0; i < n; i++)
                 {
                     double x_i = a + i * h + h / 2.0;
-                    integral += h * func(x_i);
+                    integral += h * SafeFunction(func, x_i);
                 }
             } while (Math.Abs(previousIntegral - integral) > exp);
 
@@ -106,10 +120,11 @@ namespace Integrals
 
 
 
+
         public static double SimpsonMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
         {
-            int n = 1; // Начальное количество разбиений
-            double h = (b - a) / n; // Шаг разбиения
+            int n = 2; // Начальное количество разбиений, должно быть четным для метода Симпсона
+            double h = (b - a) / n;
             double integral = 0.0;
             double previousIntegral = double.MaxValue;
 
@@ -118,43 +133,31 @@ namespace Integrals
                 previousIntegral = integral;
                 integral = 0.0;
 
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < n; i += 2)
                 {
-                    double x_i = a + i * h; // Левая граница текущего интервала
-                    double x_next = a + (i + 1) * h; // Правая граница текущего интервала
-                    double x_mid = (x_i + x_next) / 2.0; // Середина текущего интервала
+                    double x_i = a + i * h;
+                    double x_mid = a + (i + 1) * h;
+                    double x_next = a + (i + 2) * h;
 
-                    integral += h / 6.0 * (func(x_i) + 4 * func(x_mid) + func(x_next)); // Площадь интервала по методу Симпсона
+                    integral += h / 3.0 * (SafeFunction(func, x_i) + 4 * SafeFunction(func, x_mid) + SafeFunction(func, x_next));
                 }
 
-                n *= 2; // Удвоение числа разбиений
-                h = (b - a) / n; // Пересчет шага
+                n *= 2;
+                h = (b - a) / n;
             }
 
             Opt = n / 2;
-
             return integral;
         }
-
-
         public static double TrapezoidalMethod(Func<double, double> func, double a, double b, double exp, out int Opt)
         {
-            int n = 1; // Начнем с одного разбиения
-            double h = (b - a) / n; // Шаг разбиения
-            double integral = h * (func(a) + func(b)) / 2.0; // Приближение интеграла с одним разбиением
-
-            // Проверка точности после первого расчета
-            if (Math.Abs(func(a) + func(b) - 2 * integral / h) * h <= exp)
-            {
-                Opt = n;
-                return integral;
-            }
-           
+            int n = 1;
+            double h = (b - a) / n;
+            double integral = h * (SafeFunction(func, a) + SafeFunction(func, b)) / 2.0;
 
             double previousIntegral = double.MaxValue;
 
-            // Основной цикл, если начальное приближение не удовлетворяет точности
-            do
+            while (Math.Abs(previousIntegral - integral) > exp)
             {
                 previousIntegral = integral;
                 integral = 0.0;
@@ -166,14 +169,12 @@ namespace Integrals
                     double x_i = a + i * h;
                     double x_next = a + (i + 1) * h;
 
-                    integral += h * (func(x_i) + func(x_next)) / 2.0;
+                    integral += h * (SafeFunction(func, x_i) + SafeFunction(func, x_next)) / 2.0;
                 }
-            } while (Math.Abs(previousIntegral - integral) > exp);
+            }
 
             Opt = n;
             return integral;
         }
-
-
     }
 }

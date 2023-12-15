@@ -51,8 +51,10 @@ namespace Integrals
             int n;
             string aText = aBox.Text.Replace("pi", Math.PI.ToString());
             string bText = bBox.Text.Replace("pi", Math.PI.ToString());
+            string aaText = aBox.Text.Replace("/", Math.PI.ToString());
+            string bbText = bBox.Text.Replace("/", Math.PI.ToString());
 
-            if (!double.TryParse(aText, out a) || !double.TryParse(bText, out b))
+            if (!double.TryParse(aaText, out a) || !double.TryParse(bbText, out b))
             {
                 throw new Exception("Некорректные значения входных данных");
             }
@@ -89,7 +91,7 @@ namespace Integrals
             }
             AddVerticalLine(chart1.ChartAreas[0], a, Color.Red);
             AddVerticalLine(chart1.ChartAreas[0], b, Color.Red);
-
+            
             //Метод Прямоугольников
             if (rectangleBox.Checked)
             {
