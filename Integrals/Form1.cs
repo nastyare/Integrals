@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using org.matheval.Functions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ZedGraph;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using System.Drawing;
-using System.Linq;
+using System.Globalization;
 
 namespace Integrals
 {
@@ -53,12 +49,13 @@ namespace Integrals
         {
             double a, b, exp;
             int n;
+            string aText = aBox.Text.Replace("pi", Math.PI.ToString());
+            string bText = bBox.Text.Replace("pi", Math.PI.ToString());
 
-            if (!double.TryParse(aBox.Text, out a) || !double.TryParse(bBox.Text, out b))
+            if (!double.TryParse(aText, out a) || !double.TryParse(bText, out b))
             {
                 throw new Exception("Некорректные значения входных данных");
             }
-
             if (!double.TryParse(eBox.Text, out exp) && !int.TryParse(nBox.Text, out n))
             {
                 MessageBox.Show("Введите корректное значение для точности (e) или числа шагов (n)");
@@ -72,6 +69,14 @@ namespace Integrals
                 MessageBox.Show("Не выбран ни один из методов расчёта.");
             }
 
+            int decimalPlaces = 0;
+            double epsCopy = exp;
+            while (epsCopy < 1 && decimalPlaces <= 15)
+            { // Ограничиваем максимальное количество знаков до 15
+                decimalPlaces++;
+                epsCopy *= 10;
+            }
+            string formatSpecifier = "F" + decimalPlaces.ToString();
 
             this.chart1.Series[0].Points.Clear();
             double x = a;
@@ -98,10 +103,8 @@ namespace Integrals
                 {
                     //ЧЕРЕЗ Е
                     double rectangleResult = CalculationExp.RectangleMethod(function, a, b, exp, out int Opt);
-                    int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
-                    resrecBox.Text = string.Format($"{{0:F{decimalPlaces}}}", Math.Truncate(rectangleResult * 100) / 100);
-
-                    nrecBox.Text = $"{Opt}";
+                    resrecBox.Text = rectangleResult.ToString(formatSpecifier, CultureInfo.InvariantCulture); // Используйте динамический формат
+                    nrecBox.Text = Opt.ToString();
                 }
                 else if (!string.IsNullOrEmpty(nBox.Text))
                 {
@@ -126,10 +129,9 @@ namespace Integrals
                 if (!string.IsNullOrEmpty(eBox.Text))
                 {
                     //ЧЕРЕЗ Е
-                    double trapezoidaResult = CalculationExp.TrapezoidalMethod(function, a, b, exp, out int Opt);
-                    int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
-                    restraBox.Text = string.Format($"{{0:F{decimalPlaces}}}", Math.Truncate(trapezoidaResult * 100) / 100);
-                    ntraBox.Text = $"{Opt}";
+                    double trapezoidaResult = CalculationExp.TrapezoidalMethod(function, a, b, exp, out int Opt);                 
+                    restraBox.Text = trapezoidaResult.ToString(formatSpecifier, CultureInfo.InvariantCulture); // Используйте динамический формат
+                    ntraBox.Text = Opt.ToString();
                 }
                 else if (!string.IsNullOrEmpty(nBox.Text))
                 {
@@ -154,9 +156,8 @@ namespace Integrals
                 {
                     //ЧЕРЕЗ Е
                     double simpsonResult = CalculationExp.SimpsonMethod(function, a, b, exp, out int Opt);
-                    int decimalPlaces = BitConverter.GetBytes(decimal.GetBits((decimal)exp)[3])[2];
-                    ressimBox.Text = string.Format($"{{0:F{decimalPlaces}}}", Math.Truncate(simpsonResult * 100) / 100);
-                    nsimBox.Text = $"{Opt}";
+                    ressimBox.Text = simpsonResult.ToString(formatSpecifier, CultureInfo.InvariantCulture); // Используйте динамический формат
+                    nsimBox.Text = Opt.ToString();
                 }
                 else if (!string.IsNullOrEmpty(nBox.Text))
                 {

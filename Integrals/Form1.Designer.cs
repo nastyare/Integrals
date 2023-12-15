@@ -28,16 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рассчитатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.formBox = new System.Windows.Forms.TextBox();
             this.aBox = new System.Windows.Forms.TextBox();
@@ -57,6 +55,7 @@
             this.restraBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.nBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -79,7 +78,7 @@
             this.рассчитатьToolStripMenuItem,
             this.очиститьToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(64, 25);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(64, 27);
             this.menuToolStripMenuItem.Text = "Menu";
             // 
             // рассчитатьToolStripMenuItem
@@ -99,37 +98,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(31, 49);
+            this.label1.Location = new System.Drawing.Point(58, 67);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 20);
+            this.label1.Size = new System.Drawing.Size(15, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Формула:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(288, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "a = ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(502, 52);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 20);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "b =";
+            this.label1.Text = "∫";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(686, 52);
+            this.label4.Location = new System.Drawing.Point(318, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 20);
             this.label4.TabIndex = 4;
@@ -137,7 +116,7 @@
             // 
             // formBox
             // 
-            this.formBox.Location = new System.Drawing.Point(133, 49);
+            this.formBox.Location = new System.Drawing.Point(91, 67);
             this.formBox.Name = "formBox";
             this.formBox.Size = new System.Drawing.Size(100, 22);
             this.formBox.TabIndex = 5;
@@ -145,40 +124,40 @@
             // 
             // aBox
             // 
-            this.aBox.Location = new System.Drawing.Point(341, 49);
+            this.aBox.Location = new System.Drawing.Point(50, 90);
             this.aBox.Name = "aBox";
-            this.aBox.Size = new System.Drawing.Size(100, 22);
+            this.aBox.Size = new System.Drawing.Size(23, 22);
             this.aBox.TabIndex = 6;
             this.aBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // bBox
             // 
-            this.bBox.Location = new System.Drawing.Point(555, 50);
+            this.bBox.Location = new System.Drawing.Point(50, 42);
             this.bBox.Name = "bBox";
-            this.bBox.Size = new System.Drawing.Size(100, 22);
+            this.bBox.Size = new System.Drawing.Size(23, 22);
             this.bBox.TabIndex = 7;
             // 
             // eBox
             // 
-            this.eBox.Location = new System.Drawing.Point(740, 52);
+            this.eBox.Location = new System.Drawing.Point(376, 67);
             this.eBox.Name = "eBox";
             this.eBox.Size = new System.Drawing.Size(100, 22);
             this.eBox.TabIndex = 8;
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(34, 278);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(928, 340);
             this.chart1.TabIndex = 9;
             this.chart1.Text = "chart1";
@@ -187,7 +166,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(17, 155);
+            this.label5.Location = new System.Drawing.Point(17, 171);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(165, 20);
             this.label5.TabIndex = 10;
@@ -197,7 +176,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(17, 206);
+            this.label6.Location = new System.Drawing.Point(17, 221);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(189, 20);
             this.label6.TabIndex = 11;
@@ -205,7 +184,7 @@
             // 
             // nrecBox
             // 
-            this.nrecBox.Location = new System.Drawing.Point(278, 153);
+            this.nrecBox.Location = new System.Drawing.Point(278, 169);
             this.nrecBox.Name = "nrecBox";
             this.nrecBox.ReadOnly = true;
             this.nrecBox.Size = new System.Drawing.Size(100, 22);
@@ -213,7 +192,7 @@
             // 
             // resrecBox
             // 
-            this.resrecBox.Location = new System.Drawing.Point(278, 204);
+            this.resrecBox.Location = new System.Drawing.Point(278, 219);
             this.resrecBox.Name = "resrecBox";
             this.resrecBox.ReadOnly = true;
             this.resrecBox.Size = new System.Drawing.Size(100, 22);
@@ -223,7 +202,7 @@
             // 
             this.rectangleBox.AutoSize = true;
             this.rectangleBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rectangleBox.Location = new System.Drawing.Point(191, 112);
+            this.rectangleBox.Location = new System.Drawing.Point(204, 130);
             this.rectangleBox.Name = "rectangleBox";
             this.rectangleBox.Size = new System.Drawing.Size(237, 24);
             this.rectangleBox.TabIndex = 14;
@@ -234,7 +213,7 @@
             // 
             this.simpsonBox.AutoSize = true;
             this.simpsonBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpsonBox.Location = new System.Drawing.Point(482, 112);
+            this.simpsonBox.Location = new System.Drawing.Point(482, 130);
             this.simpsonBox.Name = "simpsonBox";
             this.simpsonBox.Size = new System.Drawing.Size(173, 24);
             this.simpsonBox.TabIndex = 15;
@@ -245,7 +224,7 @@
             // 
             this.trapezoidaBox.AutoSize = true;
             this.trapezoidaBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.trapezoidaBox.Location = new System.Drawing.Point(792, 112);
+            this.trapezoidaBox.Location = new System.Drawing.Point(792, 130);
             this.trapezoidaBox.Name = "trapezoidaBox";
             this.trapezoidaBox.Size = new System.Drawing.Size(170, 24);
             this.trapezoidaBox.TabIndex = 16;
@@ -254,7 +233,7 @@
             // 
             // nsimBox
             // 
-            this.nsimBox.Location = new System.Drawing.Point(521, 153);
+            this.nsimBox.Location = new System.Drawing.Point(521, 169);
             this.nsimBox.Name = "nsimBox";
             this.nsimBox.ReadOnly = true;
             this.nsimBox.Size = new System.Drawing.Size(100, 22);
@@ -262,7 +241,7 @@
             // 
             // ressimBox
             // 
-            this.ressimBox.Location = new System.Drawing.Point(521, 204);
+            this.ressimBox.Location = new System.Drawing.Point(521, 219);
             this.ressimBox.Name = "ressimBox";
             this.ressimBox.ReadOnly = true;
             this.ressimBox.Size = new System.Drawing.Size(100, 22);
@@ -270,7 +249,7 @@
             // 
             // ntraBox
             // 
-            this.ntraBox.Location = new System.Drawing.Point(830, 155);
+            this.ntraBox.Location = new System.Drawing.Point(830, 169);
             this.ntraBox.Name = "ntraBox";
             this.ntraBox.ReadOnly = true;
             this.ntraBox.Size = new System.Drawing.Size(100, 22);
@@ -278,7 +257,7 @@
             // 
             // restraBox
             // 
-            this.restraBox.Location = new System.Drawing.Point(830, 204);
+            this.restraBox.Location = new System.Drawing.Point(830, 221);
             this.restraBox.Name = "restraBox";
             this.restraBox.ReadOnly = true;
             this.restraBox.Size = new System.Drawing.Size(100, 22);
@@ -288,7 +267,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.216F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(870, 52);
+            this.label7.Location = new System.Drawing.Point(539, 69);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 20);
             this.label7.TabIndex = 21;
@@ -296,16 +275,26 @@
             // 
             // nBox
             // 
-            this.nBox.Location = new System.Drawing.Point(922, 52);
+            this.nBox.Location = new System.Drawing.Point(590, 69);
             this.nBox.Name = "nBox";
             this.nBox.Size = new System.Drawing.Size(100, 22);
             this.nBox.TabIndex = 22;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(204, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 16);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "dx";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 614);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.nBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.restraBox);
@@ -325,8 +314,6 @@
             this.Controls.Add(this.aBox);
             this.Controls.Add(this.formBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -347,8 +334,6 @@
         private System.Windows.Forms.ToolStripMenuItem рассчитатьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox formBox;
         private System.Windows.Forms.TextBox aBox;
@@ -368,6 +353,7 @@
         private System.Windows.Forms.TextBox restraBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox nBox;
+        private System.Windows.Forms.Label label2;
     }
 }
 
